@@ -1,0 +1,60 @@
+OK it is time to make the player move.
+
+The gosu framework gives you the ability to trap for
+keystrokes. So we can use the arrow keys as a way to 
+move our player up and down for example.
+
+If you recall the game window has an upate method.
+So in this update method we check for which
+keyboard keys were pressed.
+
+in programming we can do this with an if statement like this
+
+def update
+  if button_down? Gosu::Button::KbLeft
+    @player1.move_left
+  end
+end
+
+then we go to the player class and add the move_left method like this
+
+def move_left
+end
+
+we first need to change the draw method on the player.
+the draw method is currently being drawn at a fixed position of 50,50. That will have to be a variable
+in order for the position of the player to change as the keyboard is pressed.
+
+So how do we do this?
+
+By adding a variable.
+
+In the initialize method, we will initialize two variables:
+
+@x = 50
+@y = 50
+
+then we will go to the draw method and replace the fixed number 50 with the varibles like this
+
+def draw
+  draw @x, @y
+end
+
+now we go back to out move_left method and type the following:
+
+def move_left
+	@x = @x - 10
+end
+
+this means that the left position will change every time the left arrow is pressed.
+
+Every time this is pressed, the position X will be reduced by 10 pixels.
+
+when the draw method goes to draw the object, the x position will a new one and it will give the illusion that the object is moving.
+
+Let's try it.
+
+================================
+The next step is to lock down the movement, we can not have the player go left forever. It will go out of the sreen and it we will not see it again.
+
+
