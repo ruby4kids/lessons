@@ -1,11 +1,13 @@
 require 'rubygems'
 require 'gosu'
 require 'player'
+require 'ball'
 
 class MyGame < Gosu::Window
   def initialize
     super(300, 300, false)
     @player1 = Player.new(self)
+    @ball = Ball.new(self)
   end
   
   def update
@@ -24,10 +26,13 @@ class MyGame < Gosu::Window
     if button_down? Gosu::Button::KbDown
       @player1.move_down
     end
+    
+    @ball.update
   end
   
   def draw
     @player1.draw
+    @ball.draw
   end
   
 end
