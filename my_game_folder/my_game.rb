@@ -5,9 +5,9 @@ require 'ball'
 
 class MyGame < Gosu::Window
   def initialize
-    super(300, 300, false)
+    super(600, 400, false)
     @player1 = Player.new(self)
-    @ball = Ball.new(self)
+    @balls = 3.times.map {Ball.new(self)}
     @running = true
   end
 
@@ -29,9 +29,9 @@ class MyGame < Gosu::Window
         @player1.move_down
       end
 
-      @ball.update
+      @balls.each {|ball| ball.update}
 
-      if @player1.hit_by? @ball
+      if @player1.hit_by? @balls
         stop_game!
       end
 
@@ -44,7 +44,7 @@ class MyGame < Gosu::Window
 
   def draw
     @player1.draw
-    @ball.draw
+    @balls.each {|ball| ball.draw}
   end
 
   def stop_game!
@@ -53,7 +53,7 @@ class MyGame < Gosu::Window
 
   def restart_game
     @running = true
-    @ball.reset!
+    @balls.each {|ball| ball.reset!}
   end
 
 end
